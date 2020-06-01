@@ -42,7 +42,7 @@ int main() {
       // Insertar
       case 1:
         printf("Insertar\n");
-        itree_insertar (arbol);
+        itree_insertar (intervalo, arbol);
       break;
       // Elimnar
       case 2:
