@@ -3,12 +3,12 @@
 
 typedef struct _Intervalo {
   double a, b; // [a, b] intervalo
-  double extremo; // extremo maximo b
 } Intervalo;
 
 typedef struct _AVL {
   Intervalo *dato;
   int FB; /* factor de balance*/
+  double extremo; // extremo maximo b
   struct _AVL *izq, *der;
 } AVL;
 
@@ -22,6 +22,9 @@ Intervalo* crear_intervalo (double a, double b);
 
 //Crear arbol
 AVL* itree_crear ();
+
+//Muestra el intervalo en terminal
+void mostrar_intervalo (Intervalo intervalo);
 
 //Insertar en el arbol
 void itree_insertar (Intervalo* intervalo, AVL* arbol);

@@ -1,3 +1,4 @@
 Tutorial de GIT para principantes! - Usando la linea de comandos en Git: https://www.youtube.com/watch?v=kEPF-MWGq1w
 Data Structure and Algorithms - AVL Trees : https://www.tutorialspoint.com/data_structures_algorithms/avl_tree_algorithm.htm
-
+DFS https://www.geeksforgeeks.org/dfs-traversal-of-a-tree-using-recursion/
+BFS https://www.geeksforgeeks.org/level-order-tree-traversal/
