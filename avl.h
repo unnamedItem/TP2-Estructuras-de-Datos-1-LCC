@@ -10,12 +10,12 @@ typedef struct _AVL {
   Intervalo *dato;
   int FB; /* factor de balance*/
   struct _AVL *izq, *der;
-} AVL
+} AVL;
 
 //==============================================================================
 
-//Comprueba si dos intervalos se intersectan
-int interscta (Intervalo *intervalo1, Intervalo *intervalo2);
+/*  Comprueba si dos intervalos se intersectan */
+int intersecta (Intervalo *intervalo1, Intervalo *intervalo2);
 
 //Reserva memoria para un intervalo
 Intervalo* crear_intervalo (double a, double b);
@@ -52,7 +52,5 @@ void rotacion_dobleR (AVL* arbol);
 
 //Rotacion doble izquierda
 void rotacion_dobleL (AVL* arbol);
-
-//Hola como estas
 
 #endif
