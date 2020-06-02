@@ -14,3 +14,10 @@ AVL* itree_crear () {
     return NULL;
 }
 
+/*
+Verifica si los intervalos [a1, b1] y [a2, b2] se intersectan
+*/
+int intersecta (Intervalo inter1, Intervalo inter2) {
+  if (inter1->a < inter2->b && inter1->b > inter2->a) return 1;
+  return 0;
+}
