@@ -3,12 +3,15 @@
 
 typedef struct _Intervalo {
   double a, b; // [a, b] intervalo
-  double extremo; // extremo maximo b
 } Intervalo;
+
+typedef void (*FuncionVisitante) (Intervalo* intervalo);
+
 
 typedef struct _AVL {
   Intervalo *dato;
   int FB; /* factor de balance*/
+  double extremo; // extremo maximo b
   struct _AVL *izq, *der;
 } AVL;
 
@@ -23,6 +26,9 @@ Intervalo* crear_intervalo (double a, double b);
 //Crear arbol
 AVL* itree_crear ();
 
+//Muestra el intervalo en terminal
+void mostrar_intervalo (Intervalo* intervalo);
+
 //Insertar en el arbol
 void itree_insertar (Intervalo* intervalo, AVL* arbol);
 
@@ -33,7 +39,7 @@ void itree_destruir (AVL* arbol);
 AVL* itree_eliminar (Intervalo* intervalo, AVL* arbol);
 
 //Recorrido en profundidad del arbol
-void itree_recorrer_dfs (AVL* arbol);
+void itree_recorrer_dfs (AVL* arbol, FuncionVisitante funcion);
 
 //Recorrido a lo ancho del arbol
 void itree_recorrer_bfs (AVL* arbol);
@@ -53,4 +59,4 @@ void rotacion_dobleR (AVL* arbol);
 //Rotacion doble izquierda
 void rotacion_dobleL (AVL* arbol);
 
-#endif /* AVL_H */
+#endif
