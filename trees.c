@@ -39,16 +39,30 @@ void itree_recorrer_dfs (AVL *arbol, FuncionVisitante visit) {
 }
 
 void itree_insertar( Intervalo *intervalo, AVL *arbol  ) {
-  AVL *nuevoAVL = malloc( sizeof( AVL ) );
-  nuevoAVL->dato == intervalo;
 
   if ( arbol == NULL ) {
+    AVL *nuevoAVL = malloc( sizeof( AVL ) );
+    nuevoAVL->dato == intervalo;
     nuevoAVL->extremo = intervalo->b;
     nuevoAVL->der == NULL;
     nuevoAVL->izq == NULL;
     nuevoAVL->FB == 0;
     arbol = nuevoAVL;
   }
+
+  else {
+
+    if ( intervalo->a < arbol->dato->a) {
+      itree_insertar( intervalo, arbol->izq );
+    }
+
+    //else 
+  
+  }
   
 }
 
+int intervalo_igual(Intervalo *intervalo1, Intervalo *intervalo2) {
+  if ( ( intervalo1->a == intervalo2->a ) && ( intervalo1->b == intervalo2->b ) ) return 1;
+  else return 0;
+}
