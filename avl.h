@@ -33,6 +33,9 @@ void mostrar_intervalo (Intervalo intervalo);
 void mostrar_intervalo (Intervalo* intervalo);
 >>>>>>> 85c834c40a4942e33b1e6220ef4d06533f5007b1
 
+//Funcion auxiliar de itree_insertar
+void insertar (AVL *arbol, int* aumento, Intervalo *intervalo);
+
 //Insertar en el arbol
 void itree_insertar (Intervalo* intervalo, AVL* arbol);
 
