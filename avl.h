@@ -5,6 +5,9 @@ typedef struct _Intervalo {
   double a, b; // [a, b] intervalo
 } Intervalo;
 
+typedef void (*FuncionVisitante) (Intervalo* intervalo);
+
+
 typedef struct _AVL {
   Intervalo *dato;
   int FB; /* factor de balance*/
@@ -24,7 +27,11 @@ Intervalo* crear_intervalo (double a, double b);
 AVL* itree_crear ();
 
 //Muestra el intervalo en terminal
+<<<<<<< HEAD
 void mostrar_intervalo (Intervalo intervalo);
+=======
+void mostrar_intervalo (Intervalo* intervalo);
+>>>>>>> 85c834c40a4942e33b1e6220ef4d06533f5007b1
 
 //Insertar en el arbol
 void itree_insertar (Intervalo* intervalo, AVL* arbol);
@@ -36,7 +43,7 @@ void itree_destruir (AVL* arbol);
 AVL* itree_eliminar (Intervalo* intervalo, AVL* arbol);
 
 //Recorrido en profundidad del arbol
-void itree_recorrer_dfs (AVL* arbol);
+void itree_recorrer_dfs (AVL* arbol, FuncionVisitante funcion);
 
 //Recorrido a lo ancho del arbol
 void itree_recorrer_bfs (AVL* arbol);
