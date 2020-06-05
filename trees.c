@@ -94,13 +94,11 @@ void rotacion_simpleR (AVL* arbol) {
 
 void rotacion_dobleL (AVL* arbol) {
   rotacion_simpleR (arbol->izq);
-  actualizar_extremo (arbol, arbol->izq);
   rotacion_simpleL (arbol);
 }
 
 void rotacion_dobleR (AVL* arbol) {
   rotacion_simpleL (arbol->der);
-  actualizar_extremo (arbol, arbol->der);
   rotacion_simpleR (arbol);
 }
 
