@@ -66,3 +66,28 @@ int intervalo_igual(Intervalo *intervalo1, Intervalo *intervalo2) {
   if ( ( intervalo1->a == intervalo2->a ) && ( intervalo1->b == intervalo2->b ) ) return 1;
   else return 0;
 }
+
+int itree_altura( AVL* arbol ) {
+
+  if ( arbol == NULL){ 
+    return 0;
+  }
+
+  else {
+    int rAltura = itree_altura( arbol->der );
+    int lAltura = itree_altura( arbol->izq );
+   
+    if ( rAltura > lAltura) {
+      return rAltura + 1;
+      }
+
+    else {
+      return lAltura + 1;  
+    }
+  }
+}
+
+int itree_balance_factor( AVL *arbol) {
+  return itree_altura( arbol->izq ) - itree_altura( arbol->der );
+}
+
