@@ -91,3 +91,10 @@ int itree_balance_factor( AVL *arbol) {
   return itree_altura( arbol->izq ) - itree_altura( arbol->der );
 }
 
+void itree_destruir( AVL *arbol) {
+  if ( arbol != NULL) {
+    itree_destruir(arbol->izq);
+    itree_destruir(arbol->der);
+    free( arbol );
+  }
+}

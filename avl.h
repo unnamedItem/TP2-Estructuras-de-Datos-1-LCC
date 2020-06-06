@@ -59,4 +59,12 @@ void rotacion_dobleR (AVL* arbol);
 //Rotacion doble izquierda
 void rotacion_dobleL (AVL* arbol);
 
+//Retorna 1 si dos intervalos son iguale, 0 si no.
+int intervalo_igual(Intervalo *intervalo1, Intervalo *intervalo2);
+
+//devuelve la altura de un arbol
+int itree_altura( AVL* arbol );
+
+//Regresa el factor balance de un arbol
+int itree_balance_factor( AVL *arbol);
 #endif
