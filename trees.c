@@ -100,8 +100,10 @@ void itree_destruir( AVL* arbol ) {
 }
 
 AVL* itree_intersecar( Intervalo* intervalo, AVL* arbol )  {
+  
+  if ( intervalo->a > arbol->extremo ) return NULL;
 
-  if ( intersecta( intervalo, arbol->dato) ) return arbol;
+  else if ( intersecta( intervalo, arbol->dato) ) return arbol;
 
   else if ( intervalo->b <= arbol->extremo ) itree_intersecar( intervalo, arbol->izq);
   
