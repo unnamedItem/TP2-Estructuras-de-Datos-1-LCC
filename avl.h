@@ -45,7 +45,7 @@ void itree_recorrer_dfs (AVL* arbol, FuncionVisitante funcion);
 void itree_recorrer_bfs (AVL* arbol);
 
 //Busqueda de interseccion de intervalos en el arbol
-Intervalo* itree_intersectar (Intervalo* intervalo, AVL* arbol);
+AVL* itree_intersecar (Intervalo* intervalo, AVL* arbol);
 
 //Rotacion simple derecha
 void rotacion_simpleR (AVL* arbol);
