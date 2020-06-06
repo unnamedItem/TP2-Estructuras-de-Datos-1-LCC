@@ -51,8 +51,8 @@ void actualizar_rotacion_derecha (AVL* nodo1, AVL* nodo2 ) {
     actualizar_extremo (nodo2, nodo2->izq);
     return; // Nodo 1 posee el maximo del sub arbol
     }
-  actualizar_extremo (nodo1, nodo2); // Nodo 2 posee el maximo
   }
+  actualizar_extremo (nodo1, nodo2); // Nodo 2 posee el maximo
 }
 
 void actualizar_rotacion_izquierda (AVL* nodo1, AVL* nodo2) {
@@ -65,68 +65,70 @@ void actualizar_rotacion_izquierda (AVL* nodo1, AVL* nodo2) {
     actualizar_extremo (nodo2, nodo2->der);
     return; // Nodo 1 posee el maximo del sub arbol
     }
-  actualizar_extremo (nodo1, nodo2); // Nodo 2 posee el maximo
   }
+  actualizar_extremo (nodo1, nodo2); // Nodo 2 posee el maximo
 }
 
 
-void rotacion_simpleL (AVL* arbol) {
-  AVL* aux = arbol->izq->der;
-  arbol->izq->der = arbol;
-  arbol->izq->FB = 0;
-  AVL* aux2 = arbol->izq;
-  arbol->izq = aux;
-  arbol->FB = 0;
-  arbol = aux2;
-  actualizar_rotacion_izquierda (arbol, arbol->izq);
+void rotacion_simpleL (AVL** arbol) {
+  AVL* aux = (*arbol)->izq->der;
+  (*arbol)->izq->der = (*arbol);
+  (*arbol)->izq->FB = 0;
+  AVL* aux2 = (*arbol)->izq;
+  (*arbol)->izq = aux;
+  (*arbol)->FB = 0;
+  *arbol = aux2;
+  actualizar_rotacion_izquierda ((*arbol), (*arbol)->der);
 }
 
-void rotacion_simpleR (AVL* arbol) {
-  AVL* aux = arbol->der->izq;
-  arbol->der->izq = arbol;
-  arbol->izq->FB = 0;
-  AVL* aux2 = arbol->der;
-  arbol->der = aux;
-  arbol->FB = 0;
-  arbol = aux2;
-  actualizar_rotacion_derecha (arbol, arbol->der);
+void rotacion_simpleR (AVL** arbol) {
+  AVL* aux = (*arbol)->der->izq;
+  (*arbol)->der->izq = (*arbol);
+  (*arbol)->der->FB = 0;
+  AVL* aux2 = (*arbol)->der;
+  (*arbol)->der = aux;
+  (*arbol)->FB = 0;
+  *arbol = aux2;
+  actualizar_rotacion_derecha ((*arbol), (*arbol)->izq);
 }
 
-void rotacion_dobleL (AVL* arbol) {
-  rotacion_simpleR (arbol->izq);
+void rotacion_dobleL (AVL** arbol) {
+  rotacion_simpleR (&(*arbol)->izq);
+  actualizar_extremo ((*arbol), (*arbol)->izq);
   rotacion_simpleL (arbol);
 }
 
-void rotacion_dobleR (AVL* arbol) {
-  rotacion_simpleL (arbol->der);
+void rotacion_dobleR (AVL** arbol) {
+  rotacion_simpleL (&(*arbol)->der);
+  actualizar_extremo ((*arbol), (*arbol)->der);
   rotacion_simpleR (arbol);
 }
 
-void insertar (AVL* arbol, int* aumento, Intervalo* intervalo) {
-  if (arbol == NULL) {
-    arbol = malloc(sizeof(AVL));
-    arbol->dato = intervalo;
-    arbol->izq = NULL;
-    arbol->der = NULL;
-    arbol->FB = 0;
-    arbol->extremo = intervalo->b;
+void insertar (AVL** arbol, int* aumento, Intervalo* intervalo) {
+  if (*arbol == NULL) {
+    *arbol = malloc(sizeof(AVL));
+    (*arbol)->dato = intervalo;
+    (*arbol)->izq = NULL;
+    (*arbol)->der = NULL;
+    (*arbol)->FB = 0;
+    (*arbol)->extremo = intervalo->b;
     *aumento = 1;
   } else {
-    if (intervalo->a < arbol->dato->a) {
-      insertar (arbol->izq, aumento, intervalo);
-      actualizar_extremo (arbol, arbol->izq);
+    if (intervalo->a < (*arbol)->dato->a) {
+      insertar (&(*arbol)->izq, aumento, intervalo);
+      actualizar_extremo ((*arbol), (*arbol)->izq);
       if (aumento) {
-        switch (arbol->FB) {
+        switch ((*arbol)->FB) {
           case -1:
-            arbol->FB = 0;
+            (*arbol)->FB = 0;
             *aumento = 0;
           break;
           case 0:
-            arbol->FB = 1;
+            (*arbol)->FB = 1;
             *aumento = 1;
           break;
           case 1:
-            if (arbol->izq->FB == 1) {
+            if ((*arbol)->izq->FB == 1) {
               rotacion_simpleL (arbol);
             } else {
               rotacion_dobleL (arbol);
@@ -136,12 +138,12 @@ void insertar (AVL* arbol, int* aumento, Intervalo* intervalo) {
         }
       }
     } else {
-      insertar (arbol->der, aumento, intervalo);
-      actualizar_extremo (arbol, arbol->der);
+      insertar (&(*arbol)->der, aumento, intervalo);
+      actualizar_extremo ((*arbol), (*arbol)->der);
       if (aumento) {
-        switch (arbol->FB) {
+        switch ((*arbol)->FB) {
           case -1:
-            if (arbol->der->FB == 1) {
+            if ((*arbol)->der->FB == 1) {
               rotacion_dobleR (arbol);
             } else {
               rotacion_simpleR (arbol);
@@ -149,11 +151,11 @@ void insertar (AVL* arbol, int* aumento, Intervalo* intervalo) {
             *aumento = 1;
           break;
           case 0:
-            arbol->FB = -1;
+            (*arbol)->FB = -1;
             *aumento = 1;
           break;
           case 1:
-            arbol->FB = 0;
+            (*arbol)->FB = 0;
             *aumento = 0;
           break;
         }
@@ -162,7 +164,7 @@ void insertar (AVL* arbol, int* aumento, Intervalo* intervalo) {
   }
 }
 
-void itree_insertar (AVL* arbol, Intervalo* intervalo) {
-  int* aumento;
-  insertar (arbol, aumento, intervalo);
+void itree_insertar (AVL** arbol, Intervalo* intervalo) {
+  int aumento;
+  insertar (arbol, &aumento, intervalo);
 }
