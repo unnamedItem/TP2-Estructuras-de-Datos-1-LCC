@@ -100,9 +100,9 @@ AVL* itree_intersecar( Intervalo* intervalo, AVL* arbol )  {
 
   else if ( intersecta( intervalo, arbol->dato) ) return arbol;
 
-  else if ( intervalo->b <= arbol->dato->a ) itree_intersecar( intervalo, arbol->izq);
+  else if ( intervalo->a > arbol->dato->b ) itree_intersecar( intervalo, arbol->der);
   
-  else itree_intersecar( intervalo, arbol->der);
+  else itree_intersecar( intervalo, arbol->izq);
 }
 
 AVL* itree_buscar( Intervalo* intervalo, AVL* arbol ) {
