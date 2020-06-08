@@ -38,30 +38,6 @@ void itree_recorrer_dfs (AVL *arbol, FuncionVisitante visit) {
   itree_recorrer_dfs (arbol->der, visit);
 }
 
-void itree_insertar( Intervalo *intervalo, AVL *arbol  ) {
-
-  if ( arbol == NULL ) {
-    AVL *nuevoAVL = malloc( sizeof( AVL ) );
-    nuevoAVL->dato == intervalo;
-    nuevoAVL->extremo = intervalo->b;
-    nuevoAVL->der == NULL;
-    nuevoAVL->izq == NULL;
-    nuevoAVL->FB == 0;
-    arbol = nuevoAVL;
-  }
-
-  else {
-
-    if ( intervalo->a < arbol->dato->a) {
-      itree_insertar( intervalo, arbol->izq );
-    }
-
-    //else 
-  
-  }
-  
-}
-
 int intervalo_igual(Intervalo *intervalo1, Intervalo *intervalo2) {
   if ( ( intervalo1->a == intervalo2->a ) && ( intervalo1->b == intervalo2->b ) ) return 1;
   else return 0;
@@ -87,6 +63,25 @@ int itree_altura( AVL* arbol ) {
   }
 }
 
+void imprimir_nivel( AVL* arbol, int nivel, FuncionVisitante visit) {
+  //nivel es asignado en recorrer bfs
+  if ( arbol == NULL) // si no hay nodo no hace nada
+        return; 
+  else if ( nivel == 1) {
+    visit( arbol->dato); // si nivel == 1 imprime el nivel
+  }
+  else if ( nivel > 1)
+    imprimir_nivel( arbol->izq, nivel-1, visit );
+    imprimir_nivel( arbol->der, nivel-1, visit );
+}
+
+void itree_recorrer_bfs( AVL *arbol, FuncionVisitante visit ) {
+  int altura = itree_altura( arbol);
+  for (int nivel = 1; nivel <= altura; nivel++) {
+    imprimir_nivel( arbol, nivel, visit);
+  }
+}
+
 int itree_balance_factor( AVL *arbol) {
   return itree_altura( arbol->izq ) - itree_altura( arbol->der );
 }
@@ -105,7 +100,14 @@ AVL* itree_intersecar( Intervalo* intervalo, AVL* arbol )  {
 
   else if ( intersecta( intervalo, arbol->dato) ) return arbol;
 
-  else if ( intervalo->b <= arbol->extremo ) itree_intersecar( intervalo, arbol->izq);
+  else if ( intervalo->b <= arbol->dato->a ) itree_intersecar( intervalo, arbol->izq);
   
   else itree_intersecar( intervalo, arbol->der);
+}
+
+AVL* itree_buscar( Intervalo* intervalo, AVL* arbol ) {
+
+  if ( intervalo->a > arbol->extremo ) return NULL;
+
+  else if ( intervalo_igual( intervalo, arbol->dato )  ) return intervalo;
 }

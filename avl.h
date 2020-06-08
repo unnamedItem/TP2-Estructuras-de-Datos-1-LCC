@@ -41,23 +41,26 @@ AVL* itree_eliminar (Intervalo* intervalo, AVL* arbol);
 //Recorrido en profundidad del arbol
 void itree_recorrer_dfs (AVL* arbol, FuncionVisitante funcion);
 
+//Impresion recursiva de niveles de un arbol
+void imprimir_nivel( AVL* arbol, int nivel, FuncionVisitante visit);
+
 //Recorrido a lo ancho del arbol
-void itree_recorrer_bfs (AVL* arbol);
+void itree_recorrer_bfs (AVL* arbol, FuncionVisitante visit);
 
 //Busqueda de interseccion de intervalos en el arbol
 AVL* itree_intersecar (Intervalo* intervalo, AVL* arbol);
 
 //Rotacion simple derecha
-void rotacion_simpleR (AVL* arbol);
+void rotacion_simpleR (AVL** arbol);
 
 //Rotacion simple izquierda
-void rotacion_simpleL (AVL* arbol);
+void rotacion_simpleL (AVL** arbol);
 
 //Rotacion doble derecha
-void rotacion_dobleR (AVL* arbol);
+void rotacion_dobleR (AVL** arbol);
 
 //Rotacion doble izquierda
-void rotacion_dobleL (AVL* arbol);
+void rotacion_dobleL (AVL** arbol);
 
 //Retorna 1 si dos intervalos son iguale, 0 si no.
 int intervalo_igual(Intervalo *intervalo1, Intervalo *intervalo2);
