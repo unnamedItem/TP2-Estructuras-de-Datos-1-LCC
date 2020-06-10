@@ -53,6 +53,7 @@ int main() {
           case 2:
             printf("Eliminar\n");
             itree_eliminar ( &arbol, intervalo );
+            free( intervalo );
           break;
           // Intersectar
           case 3:
