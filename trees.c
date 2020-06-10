@@ -42,12 +42,18 @@ void itree_destruir( AVL* arbol ) {
 }
 
 AVL* itree_intersecar( Intervalo* intervalo, AVL* arbol )  {
-  if ( arbol == NULL ) return NULL;
-
-  else if ( intervalo->a > arbol->extremo ) return NULL;
-
-  else if ( intersecta( intervalo, arbol->dato) ) return arbol;
-
+  if ( arbol == NULL ) {
+    printf("No\n");
+    return NULL;
+    }
+  else if ( intervalo->a > arbol->extremo ) {
+    printf("No\n");
+    return NULL;
+    }
+  else if ( intersecta( intervalo, arbol->dato) ) {
+    printf("Si, %lf %lf\n", arbol->dato->a, arbol->dato->b);
+    return arbol;
+    }
   else if ( intervalo->a > arbol->dato->b ) return itree_intersecar( intervalo, arbol->der);
   
   else return itree_intersecar( intervalo, arbol->izq);
