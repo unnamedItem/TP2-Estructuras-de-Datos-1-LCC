@@ -25,7 +25,7 @@ int opcion (char* operacion) {
 
 int main() {
 
-  char operacion[8];
+  char operacion[255];
   double a, b;
   int op = -1;
 
@@ -52,19 +52,17 @@ int main() {
           case 2:
             printf("Eliminar\n");
             //itree_eliminar (intervalo, arbol);
-            free(intervalo);
           break;
           // Intersectar
           case 3:
             printf("Intersecar\n");
             itree_intersecar (intervalo, arbol);
-            free(intervalo);
           break;
           // Operacion invalida
           default:
             printf("Operacion no valida\n");
           break;
-          } //switch  
+          } //switch 
       } //if a b
     }
     printf("paso del if a b %d\n", op);

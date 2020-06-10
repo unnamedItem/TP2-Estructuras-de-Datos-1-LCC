@@ -36,6 +36,7 @@ void itree_destruir( AVL* arbol ) {
   if ( arbol != NULL) {
     itree_destruir(arbol->izq);
     itree_destruir(arbol->der);
+    free( arbol->dato);
     free( arbol );
   }
 }
