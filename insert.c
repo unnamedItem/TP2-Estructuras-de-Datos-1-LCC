@@ -3,9 +3,22 @@
 #include <string.h>
 #include "operaciones.h"
 
+int lexicografico (AVL* arbol, Intervalo* intervalo) {
+  if (intervalo->a < arbol->dato->a) {
+    return 1; // Izquierda
+  } else if (intervalo->a > arbol->dato->a) {
+    return -1; // Derecha
+  } else if (intervalo->b < arbol->dato->b) {
+    return 1; // Izquierda
+  } else if (intervalo->b > arbol->dato->b) {
+    return -1; // Derecha
+  } else { // Iguales
+    return 0;
+  }
+}
+
 void insertar (AVL** arbol, int* aumento, Intervalo* intervalo) {
-  
-  if (*arbol == NULL) { //agrega el nodo
+  if (*arbol == NULL) { // Inserta el nodo
     *arbol = malloc(sizeof(AVL));
     (*arbol)->dato = intervalo;
     (*arbol)->izq = NULL;
@@ -13,16 +26,13 @@ void insertar (AVL** arbol, int* aumento, Intervalo* intervalo) {
     (*arbol)->FB = 0;
     (*arbol)->extremo = intervalo->b;
     *aumento = 1;
-   }
-
-   else {
-    if ( intervalo->a < (*arbol)->dato->a ) {
-      insertar ( &(*arbol)->izq, aumento, intervalo );
-      actualizar_extremo ( (*arbol), (*arbol)->izq );
-
-      if ( aumento ) {
-
-        switch ( (*arbol)->FB ) {
+  } else { // Busca el lugar correcto
+    switch (lexicografico (*arbol, intervalo)) {
+    case 1: // Izquierda
+      insertar (&(*arbol)->izq, aumento, intervalo);
+      actualizar_extremo ((*arbol), (*arbol)->izq);
+      if (*aumento) { //Balancea
+        switch ((*arbol)->FB) {
           case -1:
             (*arbol)->FB = 0;
             *aumento = 0;
@@ -40,15 +50,16 @@ void insertar (AVL** arbol, int* aumento, Intervalo* intervalo) {
             *aumento = 1;
           break;
         }
-      }
-    }
-
-     else {
+      } // Fin del balance
+    break;
+    case 0: // Iguales
+      printf("Ya existe el intervalo en el arbol\n");
+      *aumento = 0;
+    break;
+    case -1: // Derecha
       insertar (&(*arbol)->der, aumento, intervalo);
       actualizar_extremo ((*arbol), (*arbol)->der);
-
-      if (aumento) {
-          
+      if (*aumento) { //Balancea
         switch ((*arbol)->FB) {
           case -1:
             if ((*arbol)->der->FB == 1) {
@@ -67,11 +78,14 @@ void insertar (AVL** arbol, int* aumento, Intervalo* intervalo) {
             *aumento = 0;
           break;
         }
-      }
+      } // Fin del balance
+    break;
     }
   }
 }
 
-void itree_insertar (Intervalo* intervalo, AVL* arbol) {
-    
+
+void itree_insertar (AVL** arbol, Intervalo* intervalo) {
+  int aumento;
+  insertar (arbol, &aumento, intervalo);
 }
