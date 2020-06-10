@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "avl.h"
+#include "itree.h"
+#include "recorrer.h"
+#include "operaciones.h"
+
 
 //==============================================================================
 /*
@@ -53,19 +56,19 @@ int main() {
       // Intersectar
       case 3:
         printf("Intersectar\n");
-        itree_intersectar (intervalo, arbol);
+        itree_intersecar (intervalo, arbol);
         free(intervalo);
       break;
       // DFS
       case 4:
         printf("dfs\n");
-        itree_recorrer_dfs (arbol);
+        itree_recorrer_dfs (arbol, mostrar_intervalo);
         free(intervalo);
       break;
       // BFS
       case 5:
         printf("bfs\n");
-        itree_recorrer_bfs (arbol);
+        itree_recorrer_bfs (arbol, mostrar_intervalo);
         free(intervalo);
       break;
       // Salir
@@ -73,6 +76,7 @@ int main() {
         printf("Adios\n");
         itree_destruir (arbol);
         free(intervalo);
+      break;
       // Operacion invalida
       default:
         printf("Operacion no valida\n");

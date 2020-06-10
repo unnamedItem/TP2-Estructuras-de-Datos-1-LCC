@@ -1,0 +1,13 @@
+CC = gcc -Wall -Wextra -Werror -std=c99 -g
+
+main: itree.o rotaciones.o recorrer.o insert.o main.c
+	$(CC) recorrer.o itree.o rotaciones.o insert.o main.c -o main
+itree.o: estructuras.h itree.h trees.c
+	$(CC) -c trees.c -o itree.o
+recorrer.o: estructuras.h recorrer.h recorrer.c
+	$(CC) -c recorrer.c
+rotaciones.o: estructuras.h operaciones.h rotaciones.c
+	$(CC) -c rotaciones.c
+insert.o: rotaciones.o insert.c
+	$(CC) -c insert.c
+
