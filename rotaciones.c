@@ -73,3 +73,17 @@ void rotacion_dobleRL (AVL** arbol) {
   actualizar_extremo ((*arbol), (*arbol)->der);
   rotacion_simpleL (arbol);
 }
+
+int lexicografico (AVL* arbol, Intervalo* intervalo) {
+  if (intervalo->a < arbol->dato->a) {
+    return 1; // Izquierda
+  } else if (intervalo->a > arbol->dato->a) {
+    return -1; // Derecha
+  } else if (intervalo->b < arbol->dato->b) {
+    return 1; // Izquierda
+  } else if (intervalo->b > arbol->dato->b) {
+    return -1; // Derecha
+  } else { // Iguales
+    return 0;
+  }
+}

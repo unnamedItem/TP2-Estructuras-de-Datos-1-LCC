@@ -16,4 +16,6 @@ void rotacion_dobleLR (AVL** arbol);
 
 void rotacion_dobleRL (AVL** arbol);
 
+int lexicografico (AVL* arbol, Intervalo* intervalo);
+
 #endif //_ROTACIONES_H_

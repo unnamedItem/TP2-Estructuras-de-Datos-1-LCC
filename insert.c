@@ -1,21 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "operaciones.h"
-
-int lexicografico (AVL* arbol, Intervalo* intervalo) {
-  if (intervalo->a < arbol->dato->a) {
-    return 1; // Izquierda
-  } else if (intervalo->a > arbol->dato->a) {
-    return -1; // Derecha
-  } else if (intervalo->b < arbol->dato->b) {
-    return 1; // Izquierda
-  } else if (intervalo->b > arbol->dato->b) {
-    return -1; // Derecha
-  } else { // Iguales
-    return 0;
-  }
-}
+#include "insert.h"
 
 void insertar (AVL** arbol, int* aumento, Intervalo* intervalo) {
   if (*arbol == NULL) { // Inserta el nodo

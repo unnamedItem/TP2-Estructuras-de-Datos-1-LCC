@@ -1,9 +1,11 @@
+#include "itree.h"
+#include "recorrer.h"
+#include "insert.h"
+#include "borrar.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "itree.h"
-#include "recorrer.h"
-#include "operaciones.h"
+
 
 
 //==============================================================================
@@ -37,7 +39,6 @@ int main() {
     scanf ("%s", operacion);
     op = opcion (operacion);
     if ( op == 1 || op == 2 || op == 3 ) {
-      printf("Operaciones con intervalos\n");
       scanf(" [%lf, %lf]", &a, &b);
       if (a <= b) { // formato de intervalo invalido
         Intervalo* intervalo = crear_intervalo (a, b); // crea el intervalo [a, b]
@@ -46,17 +47,17 @@ int main() {
           // Insertar
           case 1:
             printf("Insertar\n");
-            itree_insertar ( &arbol, intervalo);
+            itree_insertar ( &arbol, intervalo) ;
           break;
           // Elimnar
           case 2:
             printf("Eliminar\n");
-            //itree_eliminar (intervalo, arbol);
+            itree_eliminar ( &arbol, intervalo );
           break;
           // Intersectar
           case 3:
             printf("Intersecar\n");
-            itree_intersecar (intervalo, arbol);
+            itree_intersecar ( intervalo, arbol );
           break;
           // Operacion invalida
           default:
@@ -65,10 +66,8 @@ int main() {
           } //switch 
       } //if a b
     }
-    printf("paso del if a b %d\n", op);
 
     if ( op == 4 || op == 5 || op == 0 ) {
-      printf("Operaciones sin intervalos\n");
       switch (op) {
          // DFS
         case 4:
@@ -91,7 +90,7 @@ int main() {
           break;
       }
     }
-    printf("paso del if string\n");
+    printf("\n");
   }
   return 0;
 }

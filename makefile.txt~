@@ -10,5 +10,5 @@ rotaciones.o: estructuras.h rotaciones.h rotaciones.c
 	$(CC) -c rotaciones.c
 insert.o: rotaciones.o insert.c
 	$(CC) -c insert.c
-borrar.o: rotaciones.o itree.h borrar.h borrar.c
-	$(CC) -c borrar.c
+borrar.o: rotaciones.o borrar.c
+$(CC) -c borrar.c
